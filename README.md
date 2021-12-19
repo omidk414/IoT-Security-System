@@ -9,7 +9,7 @@ using an Arduino MEGA2560 and percussion sensor
 4. Attach the sensor to the door with any preferred method.
 5. Run the pyDistancer.py on Windows 10.
 6. Test the knock and view email to verify if the message is sent. 
-
+![Email](https://github.com/omidk414/IoT_Knock_Sensor/blob/main/8TLFob1FZ6.png)
       
           
       
