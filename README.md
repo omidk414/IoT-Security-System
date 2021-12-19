@@ -1,2 +1,2 @@
 # IoT_Knock_Sensor
-Arduino Knock Sensor
+using Arduino MEGA2560 and percussion sensor
