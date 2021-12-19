@@ -5,13 +5,13 @@ import time     # Needed for sleep function
 import smtplib  # Needed for emailing
 #import imaplib  # Needed for emailing (receiving)
 
-## USER INFO SECTION ##
-usr = "omidk414@gmail.com"         # Your Username
+## CHANGE USER INFO SECTION ##
+usr = "EMAIL@gmail.com"            # Your Username
 psw = "password"                   # Your Password
-rcp = "omid414@yahoo.com"          # The recipient
+rcp = "EMAIL@yahoo.com"            # The recipient
 msg = "Someone just knocked!"      # The Message to Send
 com = "COM4"                       # The Com your Arduino Is on
-## END OF SECTION ##
+## END OF USER INFO SECTION ##
 
 msg_sent = 0
 
