@@ -3,34 +3,56 @@
 import serial   # Needed for serial Communication
 import time     # Needed for sleep function
 import smtplib  # Needed for emailing
-#import imaplib  # Needed for emailing (receiving)
+from twilio.rest import Client # Needed for SMS messaging
 
 ## CHANGE USER INFO SECTION ##
-usr = "EMAIL@gmail.com"            # Your Username
+usr = "EMAIL@gmail.com"            # Your Email
 psw = "password"                   # Your Password
 rcp = "EMAIL@yahoo.com"            # The recipient
 msg = "Someone just knocked!"      # The Message to Send
 com = "COM4"                       # The Com your Arduino Is on
+
+account_sid = 'TWILIO_ACCOUNT_SID'
+auth_token = 'TWILIO_AUTH_TOKEN'
+twilio_number = '+1234567890'
+recipient_number = '+1234567890'
 ## END OF USER INFO SECTION ##
 
-msg_sent = 0
+msg_sent = False
 
 ser = serial.Serial(com, 9600, timeout=1)
-while 1:
+while True:
     try:
         # Read the Distance from Serial as an int
-        knock = int(ser.readline());
+        knock = int(ser.readline())
         print(knock)
-        if(knock < 80) and msg_sent is 0:
-            print ("knock read")
-            server = smtplib.SMTP_SSL("smtp.gmail.com",465)
+        
+        if knock < 80 and not msg_sent:
+            print("Knock detected!")
+            
+            # Send email
+            server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
             server.login(usr, psw)
             server.sendmail(usr, rcp, msg)
             server.close()
-            print("MSG SENT!")
+            print("Email sent!")
+            
+            # Send SMS message using Twilio
+            client = Client(account_sid, auth_token)
+            message = client.messages.create(
+                body=msg,
+                from_=twilio_number,
+                to=recipient_number
+            )
+            print("SMS sent!")
+            
+            # Set message sent flag
+            msg_sent = True
             time.sleep(1)
-        msg_sent = (msg_sent + 1) % 1 # Used to limit number of messages sent at once
+        
+        elif knock >= 80:
+            msg_sent = False
 
-    except :#ser.SerialTimeoutException:
-        print('Data could not be read')
+    except Exception as e:
+        print(f"Error: {e}")
         time.sleep(1)
