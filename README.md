@@ -32,11 +32,12 @@ Features
 ![Image](https://github.com/omidk414/IoT_Knock_Sensor/blob/main/Cirkit_Designer_JRrqDBtxGl.png)
 
 2. Clone the repository:
-```git clone https://github.com/omidk414/IoT_Knock_Sensor.git```
+
+    ```git clone https://github.com/omidk414/IoT_Knock_Sensor.git```
 
 3. Install the necessary Python packages:
 
-```pip install -r requirements.txt```
+    ```pip install -r requirements.txt```
 
 4. Connect the Arduino board to your computer via USB.
 
@@ -46,7 +47,7 @@ Features
 
 7. Run the Flask application:
 
-```flask run```
+    ```flask run```
 
 8. Open your web browser and navigate to http://localhost:5000 to access the application.
 
