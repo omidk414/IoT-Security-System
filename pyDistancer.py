@@ -1,58 +1,75 @@
-#! /bin/env python
+from flask import Flask, render_template, request, redirect, url_for
+import os
 
-import serial   # Needed for serial Communication
-import time     # Needed for sleep function
-import smtplib  # Needed for emailing
-from twilio.rest import Client # Needed for SMS messaging
+app = Flask(__name__)
+config_file = 'config.txt'
 
-## CHANGE USER INFO SECTION ##
-usr = "EMAIL@gmail.com"            # Your Email
-psw = "password"                   # Your Password
-rcp = "EMAIL@yahoo.com"            # The recipient
-msg = "Someone just knocked!"      # The Message to Send
-com = "COM4"                       # The Com your Arduino Is on
-
-account_sid = 'TWILIO_ACCOUNT_SID'
-auth_token = 'TWILIO_AUTH_TOKEN'
-twilio_number = '+1234567890'
-recipient_number = '+1234567890'
-## END OF USER INFO SECTION ##
-
-msg_sent = False
-
-ser = serial.Serial(com, 9600, timeout=1)
-while True:
+def load_config():
+    config = {}
     try:
-        # Read the Distance from Serial as an int
-        knock = int(ser.readline())
-        print(knock)
-        
-        if knock < 80 and not msg_sent:
-            print("Knock detected!")
-            
-            # Send email
-            server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-            server.login(usr, psw)
-            server.sendmail(usr, rcp, msg)
-            server.close()
-            print("Email sent!")
-            
-            # Send SMS message using Twilio
-            client = Client(account_sid, auth_token)
-            message = client.messages.create(
-                body=msg,
-                from_=twilio_number,
-                to=recipient_number
-            )
-            print("SMS sent!")
-            
-            # Set message sent flag
-            msg_sent = True
-            time.sleep(1)
-        
-        elif knock >= 80:
-            msg_sent = False
-
+        with open(config_file, 'r') as file:
+            for line in file:
+                key, value = line.strip().split('=')
+                config[key] = value
+        print("Configuration loaded.")
+    except FileNotFoundError:
+        print("Configuration file not found.")
     except Exception as e:
-        print(f"Error: {e}")
-        time.sleep(1)
+        print(f"Error loading configuration: {e}")
+    return config
+
+def save_config(email, phone, password, account_sid):
+    try:
+        with open(config_file, 'w') as file:
+            file.write(f"email={email}\n")
+            file.write(f"phone={phone}\n")
+            file.write(f"password={password}\n")
+            file.write(f"account_sid={account_sid}\n")
+        print("Configuration saved.")
+    except Exception as e:
+        print(f"Error saving configuration: {e}")
+
+@app.route('/')
+def home():
+    return render_template('home.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email_phone = request.form.get('email_phone')
+        password = request.form.get('password')
+
+        config = load_config()
+        stored_email = config.get('email', '')
+        stored_phone = config.get('phone', '')
+        stored_password = config.get('password', '')
+
+        if (email_phone == stored_email or email_phone == stored_phone) and password == stored_password:
+            return redirect(url_for('welcome', email=stored_email, phone=stored_phone))
+        else:
+            error_message = "Invalid email/phone or password."
+            return render_template('login.html', error_message=error_message)
+
+    return render_template('login.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        phone = request.form.get('phone')
+        password = request.form.get('password')
+        account_sid = request.form.get('account_sid')
+
+        save_config(email, phone, password, account_sid)
+        return redirect(url_for('login'))
+
+    return render_template('signup.html')
+
+@app.route('/welcome')
+def welcome():
+    email = request.args.get('email')
+    phone = request.args.get('phone')
+    return render_template('welcome.html', email=email, phone=phone)
+
+if __name__ == '__main__':
+    app.run()
