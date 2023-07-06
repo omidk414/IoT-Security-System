@@ -10,6 +10,7 @@ Features
     Sends SMS notifications using Twilio.
     Simple and intuitive web interface for user interaction.
     Secure user authentication and account management.
+![Image](https://github.com/omidk414/IoT-Knock-Detection-System/blob/main/knocksensor.jpg)
 
 ## Hardware Components
 
