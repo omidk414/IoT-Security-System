@@ -10,7 +10,7 @@ Features
     Sends SMS notifications using Twilio.
     Simple and intuitive web interface for user interaction.
     Secure user authentication and account management.
-![Image](https://github.com/omidk414/IoT-Knock-Detection-System/blob/main/knocksensor.jpg)
+![sensor](https://github.com/omidk414/IoT-Security-System/blob/main/images/knocksensor.jpg)
 
 ## Hardware Components
 
@@ -30,7 +30,7 @@ Features
 
 ## Getting Started
 1. Construct the project using the schematics shown below.
-![Image](https://github.com/omidk414/IoT_Knock_Sensor/blob/main/Cirkit_Designer_JRrqDBtxGl.png)
+![cirkit](https://github.com/omidk414/IoT-Security-System/blob/main/images/Cirkit_Design.png)
 
 2. Clone the repository:
 
@@ -53,7 +53,7 @@ Features
 8. Open your web browser and navigate to http://localhost:5000 to access the application.
 
 9. Test the knock and view email to verify if the message is sent. 
-![Email](https://github.com/omidk414/IoT_Knock_Sensor/blob/main/8TLFob1FZ6.png)
+![Email](https://github.com/omidk414/IoT-Security-System/blob/main/images/email.png)
 
 ## Usage
 
