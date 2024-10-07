@@ -1,70 +1,105 @@
-# Intelligent Door Knocking Security System Using IOT
-Using an Arduino MEGA2560 and percussion sensor
+# Intelligent Door Knocking Security System Using IoT
 
-This is an IoT project that utilizes a knock sensor to detect high-pitched sounds and triggers notifications through email and SMS. The project provides a low-cost, DIY security solution, serving as an alternative to expensive commercial security products. The system is built using Arduino and Python programming.
-Features
+An Arduino MEGA2560 and percussion sensor-based IoT security solution
 
-    Detects high-pitched sounds using a knock sensor module.
-    Triggers a micro LED light when a sound is detected.
-    Sends email notifications to multiple recipients.
-    Sends SMS notifications using Twilio.
-    Simple and intuitive web interface for user interaction.
-    Secure user authentication and account management.
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Features](#features)
+3. [Components](#components)
+4. [Getting Started](#getting-started)
+5. [Usage](#usage)
+6. [Configuration](#configuration)
+7. [Troubleshooting](#troubleshooting)
+8. [Contributing](#contributing)
+
+## Introduction
+
+This IoT project offers a cost-effective, DIY security solution using a knock sensor to detect high-pitched sounds and trigger notifications via email and SMS. Built with Arduino and Python, it serves as an affordable alternative to expensive commercial security systems.
+
+## Features
+
+- **Sound Detection**: Utilizes a knock sensor module to detect high-pitched sounds
+- **Visual Indicator**: Triggers a micro LED light upon sound detection
+- **Multi-channel Notifications**: 
+  - Sends email alerts to multiple recipients
+  - Delivers SMS notifications using Twilio
+- **User Interface**: Provides a simple, intuitive web interface for system interaction
+- **Security**: Implements secure user authentication and account management
+
 ![sensor](https://github.com/omidk414/IoT-Security-System/blob/main/images/knocksensor.jpg)
 
-## Hardware Components
+## Components
 
-    Arduino board
-    Knock sensor module
-    Micro LED light
-    USB cable for Arduino connection
+### Hardware Components
 
-## Software Components
+- Arduino MEGA2560 board
+- Knock sensor module
+- Micro LED light
+- USB cable for Arduino connection
 
-    Arduino IDE
-    Python
-    Flask (Python web framework)
-    pySerial (Python library for serial communication)
-    smtplib (Python library for sending emails)
-    twilio (Python library for sending SMS using Twilio API)
+### Software Components
+
+- Arduino IDE
+- Python 3.x
+- Flask (Python web framework)
+- pySerial (Python library for serial communication)
+- smtplib (Python library for sending emails)
+- twilio (Python library for Twilio API integration)
 
 ## Getting Started
-1. Construct the project using the schematics shown below.
+
+### Hardware Setup
+
+1. Assemble the project components according to the schematic below:
+
 ![cirkit](https://github.com/omidk414/IoT-Security-System/blob/main/images/Cirkit_Design.png)
 
-2. Clone the repository:
+### Software Setup
 
-    ```git clone https://github.com/omidk414/IoT_Knock_Sensor.git```
+1. Clone the repository:
+```
+git clone https://github.com/omidk414/IoT_Knock_Sensor.git
+```
 
-3. Install the necessary Python packages:
+2. Install required Python packages:
+```
+pip install -r requirements.txt
+```
 
-    ```pip install -r requirements.txt```
 
-4. Connect the Arduino board to your computer via USB.
+3. Connect the Arduino board to your computer via USB.
 
-5. Upload the knock_sensor.ino file to the Arduino using the Arduino IDE.
+4. Upload `knock_sensor.ino` to the Arduino using the Arduino IDE.
 
-6. Update the necessary configurations in the config.ini file, including email and Twilio account details.
+5. Configure the `config.ini` file with your email and Twilio account details.
 
-7. Run the Flask application:
+6. Launch the Flask application:
+```
+flask run
+```
 
-    ```flask run```
 
-8. Open your web browser and navigate to http://localhost:5000 to access the application.
-
-9. Test the knock and view email to verify if the message is sent. 
-![Email](https://github.com/omidk414/IoT-Security-System/blob/main/images/email.png)
+7. Access the application at `http://localhost:5000` in your web browser.
 
 ## Usage
 
-    Create an account or log in with your existing credentials.
+1. Create an account or log in with existing credentials.
+2. Monitor the knock sensor status on the home page.
+3. Receive notifications when a sound is detected.
+4. Customize notification settings in the account settings page.
 
-    On the home page, you will see the status of the knock sensor and receive notifications when a sound is detected.
+![Email](https://github.com/omidk414/IoT-Security-System/blob/main/images/email.png)
 
-    Customize the notification settings by adding email addresses and phone numbers in the account settings.
+## Configuration
 
-      
-          
-      
+Detailed instructions for configuring email settings, Twilio integration, and other system parameters can be found in the `config.ini` file.
 
-  
+## Troubleshooting
+
+Common issues and their solutions:
+
+- **No sound detection**: Ensure the knock sensor is properly connected and configured.
+- **Notification failures**: Verify email and Twilio settings in `config.ini`.
+- **Web interface not loading**: Check Flask server logs for errors.
+
