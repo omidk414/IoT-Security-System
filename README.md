@@ -1,4 +1,4 @@
-# IoT Knock Detection System
+# Intelligent Door Knocking Security System Using IOT
 Using an Arduino MEGA2560 and percussion sensor
 
 This is an IoT project that utilizes a knock sensor to detect high-pitched sounds and triggers notifications through email and SMS. The project provides a low-cost, DIY security solution, serving as an alternative to expensive commercial security products. The system is built using Arduino and Python programming.
