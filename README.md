@@ -11,7 +11,6 @@ An Arduino MEGA2560 and percussion sensor-based IoT security solution
 5. [Usage](#usage)
 6. [Configuration](#configuration)
 7. [Troubleshooting](#troubleshooting)
-8. [Contributing](#contributing)
 
 ## Introduction
 
